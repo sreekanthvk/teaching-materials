@@ -1,0 +1,233 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+\titleformat{\section}{\normalfont\Large\bfseries}{Lab \thesection:}{1em}{}
+
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{backcolor}{rgb}{0.95,0.95,0.92}
+\definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolor},   
+    commentstyle=\color{darkgreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{red},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    captionpos=b,
+    numbers=left,
+    numbersep=5pt,
+    showstringspaces=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\title{\textbf{Ubuntu Basics Lab Tutorial}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction to Ubuntu}
+Ubuntu is a popular Linux distribution based on Debian. It is known for its user-friendliness, security, and wide range of support for hardware and software.
+
+\textbf{Objective:} Get familiar with Ubuntu basics and its environment.
+
+\section{Understanding the UI}
+
+Ubuntu uses the \textbf{GNOME Desktop Environment} by default. GNOME provides a clean, efficient, and modern interface designed to be easy to use, even for those new to Linux.
+
+\subsection*{GNOME Highlights:}
+\begin{itemize}
+    \item \textbf{Activities Overview}: A dynamic workspace management area that shows open windows, virtual desktops (workspaces), and a search bar.
+    \item \textbf{Top Bar}: Contains system menus (date, network, volume), app shortcuts, and the system tray.
+    \item \textbf{Dock}: A quick launcher bar on the left with favorite applications and currently running ones.
+    \item \textbf{Search}: Simply press \texttt{Super (Windows key)} and type to search applications, files, and settings.
+\end{itemize}
+
+\subsection*{Steps to Explore the GNOME UI:}
+\begin{enumerate}
+    \item Log in to your Ubuntu desktop.
+    \item Move the mouse to the top-left corner or press the \texttt{Super} key to open the Activities Overview.
+    \item Click on the application launcher (``9-dot'' grid icon) to see all installed apps.
+    \item Right-click any app in the Dock to pin/unpin it.
+    \item Explore the system status by clicking on the top-right menu (for volume, network, power, etc.).
+\end{enumerate}
+
+\section{Major Default Applications in Ubuntu}
+
+Ubuntu ships with a range of default applications to support daily tasks out of the box:
+
+\begin{itemize}
+    \item \textbf{Firefox} \textendash{} Web browser
+    \item \textbf{LibreOffice Suite} \textendash{} Word Processor, Spreadsheet, Presentation (Writer, Calc, Impress)
+    \item \textbf{Files (Nautilus)} \textendash{} File manager
+    \item \textbf{Ubuntu Software Center} \textendash{} Graphical package installer and manager
+    \item \textbf{Terminal} \textendash{} Command-line access
+    \item \textbf{Settings} \textendash{} Configure system preferences
+    \item \textbf{Rhythmbox} \textendash{} Music player
+    \item \textbf{Videos (Totem)} \textendash{} Video playback application
+    \item \textbf{Document Scanner} \textendash{} Scan documents with connected devices
+    \item \textbf{Help} \textendash{} GNOME and Ubuntu help documentation
+\end{itemize}
+
+\section{Alternative UI Options}
+Ubuntu supports various desktop environments such as:
+\begin{itemize}
+    \item KDE (Kubuntu)
+    \item XFCE (Xubuntu)
+    \item LXDE (Lubuntu)
+\end{itemize}
+
+\textbf{Command to install XFCE:}
+\begin{lstlisting}[language=bash]
+sudo apt install xubuntu-desktop
+\end{lstlisting}
+
+\section{Alternatives for Ubuntu}
+Other Linux distributions include:
+\begin{itemize}
+    \item Debian
+    \item Fedora
+    \item Arch Linux
+    \item Linux Mint
+\end{itemize}
+
+Each distribution has unique features, package managers, and user interfaces.
+
+\section{Users and Permissions}
+Linux is a multi-user system. Each file has associated permissions for:
+\begin{itemize}
+    \item \texttt{r} - Read
+    \item \texttt{w} - Write
+    \item \texttt{x} - Execute
+\end{itemize}
+
+\textbf{Check permissions:}
+\begin{lstlisting}[language=bash]
+ls -l filename
+\end{lstlisting}
+
+\textbf{Change permissions:}
+\begin{lstlisting}[language=bash]
+chmod u+x script.sh
+\end{lstlisting}
+
+\section{Super User and Privilege Escalation}
+
+In Ubuntu and other Linux distributions, some operations require elevated privileges (administrative rights). There are two primary commands used for privilege escalation:
+
+\subsection*{1. \texttt{sudo} (Superuser Do)}
+\begin{itemize}
+    \item Temporarily runs a single command as the superuser (or another user if specified).
+    \item You need to be part of the \texttt{sudo} group.
+    \item It uses your own password, not the root password.
+\end{itemize}
+
+\textbf{Example:}
+\begin{lstlisting}[language=bash]
+sudo apt update
+sudo nano /etc/hosts
+\end{lstlisting}
+
+\subsection*{2. \texttt{su} (Switch User)}
+\texttt{su} is used to switch to another user account or to become the root user.
+
+\textbf{Usages:}
+\begin{itemize}
+    \item \texttt{su} \textendash{} Switches to root. Requires the root password (not available by default in Ubuntu).
+    \item \texttt{su username} \textendash{} Switches to another specified user.
+    \item \texttt{su -} \textendash{} Switches to root with the full login shell (loads environment variables like root's PATH).
+    \item \texttt{su - username} \textendash{} Logs in as a specified user with a full login shell.
+\end{itemize}
+
+\textbf{Note:} In Ubuntu, the root account is locked by default. Users use \texttt{sudo} instead.
+
+\textbf{Examples:}
+\begin{lstlisting}[language=bash]
+# Become root user (not typical in Ubuntu)
+su
+
+# Switch to another user
+su john
+
+# Switch to root with login shell (if root is unlocked)
+su -
+
+# Switch to user 'admin' with login shell
+su - admin
+\end{lstlisting}
+
+\subsection*{3. Unlocking the Root Account (Optional)}
+To set a password for the root user and enable direct login (not recommended for most users):
+
+\begin{lstlisting}[language=bash]
+sudo passwd root
+# Enter new password when prompted
+\end{lstlisting}
+
+Once done, you can use:
+\begin{lstlisting}[language=bash]
+su -
+# Then enter the root password
+\end{lstlisting}
+
+\subsection*{Best Practices:}
+\begin{itemize}
+    \item Use \texttt{sudo} for administrative tasks instead of \texttt{su} to follow Ubuntu's security model.
+    \item Avoid logging in as root directly unless absolutely necessary.
+    \item Always be cautious with commands run as superuser \textendash{} they can affect the entire system.
+\end{itemize}
+
+\section{Network, Bluetooth and Display Settings}
+
+\subsection*{Network}
+\begin{itemize}
+    \item Open \texttt{Settings \textrightarrow{} Network}.
+    \item Configure wired or wireless connections.
+    \item Use the command line tool: \texttt{nmcli} for advanced network configuration.
+\end{itemize}
+
+\subsection*{Bluetooth}
+\begin{itemize}
+    \item Navigate to \texttt{Settings \textrightarrow{} Bluetooth}.
+    \item Toggle Bluetooth ON, then pair with nearby devices.
+\end{itemize}
+
+\subsection*{Display}
+\begin{itemize}
+    \item Go to \texttt{Settings \textrightarrow{} Displays}.
+    \item Adjust resolution, refresh rate, orientation, and scale.
+    \item Set up extended or mirrored displays if multiple monitors are connected.
+\end{itemize}
+
+\section{General Settings}
+Within the Settings application, explore and configure:
+\begin{itemize}
+    \item \textbf{Date \& Time} \textendash{} Configure manually or sync with network time.
+    \item \textbf{Region \& Language} \textendash{} Change keyboard input and locale.
+    \item \textbf{Power} \textendash{} Set sleep, screen blank, and battery thresholds.
+    \item \textbf{Privacy} \textendash{} Manage screen lock, location services, and usage history.
+\end{itemize}
+
+\section{Workspaces}
+Workspaces provide multiple virtual desktops for organizing your tasks.
+
+\subsection*{How to Use Workspaces:}
+\begin{itemize}
+    \item Press \texttt{Super} key and view the workspace overview.
+    \item Drag windows to other workspaces or create a new one by moving a window to an empty space.
+    \item Navigate between workspaces using \texttt{Ctrl + Alt + Up/Down} or gestures on touchpads.
+\end{itemize}
+
+\section*{Conclusion}
+This lab introduced Ubuntu's user interface, key system tools, default applications, user permissions, and system settings. These skills are essential for navigating and managing Linux-based operating systems effectively.
+
+\end{document}
